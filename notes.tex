@@ -1,0 +1,110 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amsfonts, amssymb,venndiagram}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=false,
+    linktoc=all,
+}
+    
+\title{University of the Pacific ECPE 127 Notes}
+\author{}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+\section{Unit 1 - Probability Theory}
+\subsection{Introduction to Set Theory}
+A \textbf{set} is a collection of things. For example: 
+\begin{itemize}
+    \item Collection of all natural numbers $\mathbb{N} = \{1,2,3,4,5,...\}$
+    \item Even natural numbers less than or equal to 6: $E = \{2,4,6\}$.
+\end{itemize}
+Elements of a set are denoted using lowercase letters. For example if $x=4$ belngs to $E$ we would denote that with $x \in E$. To denote an element is \textbf{not} in a set you dash the epsilon: $5 \notin E$.
+\subsubsection{Set Operations}
+\textbf{Set Union:} \newline
+The union of two sets $A$ and $B$ is the set of all elements which is either in $A$ or $B$. Behaves similar to logical OR from digital design. Formal Definiton: $A \cup B = \{ x  | (x \in A) \lor (x \in B)\}$.
+\newline
+\begin{venndiagram2sets}[tikzoptions={scale=0.95}]
+\fillA
+\fillB
+\end{venndiagram2sets}
+\newline
+\textbf{Set Intersection:} \newline
+$A \cap B$ is the intersection of two sets, and contains every element that is both in $A$ and $B$. Behaves similarly to logical AND from digital design. Formal Defintion: $A \cap B = \{ x | (x \in A) \land (x \in B)\}$
+\newline
+\begin{venndiagram2sets}[tikzoptions={scale=0.95}]
+\fillACapB
+\end{venndiagram2sets}\newline
+\textbf{Set Compliment:}
+$A^c$ is the compliment of $A$ and contains every element not in $A$. Behaves similar to logical NOT from digital design. Formal Definition: $A^c = \{x | x \notin A\}$.
+\newline
+\begin{venndiagram2sets}[tikzoptions={scale=0.95}]
+    \fillNotA
+\end{venndiagram2sets}
+\newline
+\textbf{Set Difference:}
+$A - B = A \cap B^c$. Contains every element of $A$ that is not in $B$. \newline
+\begin{venndiagram2sets}[tikzoptions={scale=0.95}]
+\fillOnlyA
+\end{venndiagram2sets}
+
+\subsubsection{Other Definitions}
+A collection of sets $A_1, ...., A_n$ is \textbf{mutually exlusive} if and only if:
+\[
+    A_i \cap A_j = \emptyset \hspace{5mm} i \neq j 
+\]
+A collection of sets $A_1, \dots, A_n$ is \textbf{collectively exhaustive} if and only if 
+\[
+A_1 \cup A_2 \cup \dots \cup A_n = S
+\]
+Two sets are equal to each other if and only if 
+\[
+    (A \subseteq B) \land (B \subseteq A)
+\]
+\textbf{De Morgan's Law:} De Morgan's law relates all three basic set operations
+\[
+    (A \cup B)^c = A^c \cap B^c
+\]
+\textbf{Proof:} Let $x \in (A \cup B)^c$. Then as $x \notin A \cup B$ therefore $x \notin A$ and $x \notin B$ Therefore $x \in A^c \cap B^c$ Therefore $(A \cup B)^c \subseteq A^c \cap B^c$. Now assume $x \in A^c \cap B^c$. Then $x \notin A$ and $x \notin B$, and therefore $x \notin (A \cup B)$. Thus $x \in (A \cup B)^c$. Therefore $(A \cup B)^c = A^c \cap B^c$. $\square$
+\[
+ (A \cap B)^C = A^c \cup B^c
+\]
+\textbf{Proof:} Let $x \in (A \cap B)^c$. Then $x$ is either in $A$ not in $B$, in $B$ not in $A$, or not in either $A$ or $B$. Therefore $x \in A^c \cup B^c$ and thus $(A \cap B)^c \subseteq A^c \cup B^c$. Now let $x \in A^c \cup B^c$. Then by definition $x$ is either in $A^c$ or $B^c$. Thus $x$ is not in both $A$ and $B$. Therefore $x \in (A \cap B)^c$ and thus $A^c \cup B^c \subseteq (A \cap B)^c$. As $A^c \cup B^c \subseteq (A \cap B)^c$ and $(A \cap B)^c \subseteq A^c \cup B^c$, $(A\cap B)^c = A^c \cup B^c$. $\square$ 
+
+\subsection{Applying Set Theory to Probability}
+An \textbf{experiment} consists of a procedure and observations.
+
+\begin{center}
+\begin{tabular}{c|c|c}
+    Experiment & Procedure & Observation \\
+    \hline
+    Coin Flip & Flip the coin & heads or tails \\
+    Dice Rolls & Roll the die & the number face up on the die \\
+    Networking & Send packets & Record the packets that successfully get transmitted
+\end{tabular}
+\end{center}
+The \textbf{sample space} of an experiment is the finest-grain, mutually exclusive, collectively exhaustive set of all possible outcomes.  
+
+\begin{center}
+    \begin{tabular}{c|c}
+        Roll a die & $S = D = \{1,2,3,4,5,6\}$ \\
+        Flip a coin & $S = C = \{H,T\}$ \\
+        Flip a coin twice & $S = F = \{HH, HT, TH, TT\}$
+    \end{tabular}
+\end{center}
+An \textbf{event} is a set of desired outcomes of an experiment. Example: Roll a die, you win if you roll an even number. $E = \{2,4,6\}$.
+
+\subsection{Axioms}
+Probability P maps the events from a sample space to real numbers such that
+\begin{enumerate}
+    \item $P(A) \geq 0$ where $A$ is an event in the sample space $S$
+    \item $P(S) = 1$ where $S$ is the universal set 
+    \item For a countable collections of mutually exclusive sets $A_1, A_2, A_3, ... A_n \in S$, $P(A_1 \cup A_2 \cup \dots \cup A_n) = P(A_1) + P(A_2) + \dots + P(A_n)$
+
+\end{enumerate}
+
+\subsection{Conditional Probability}
+
+\end{document}

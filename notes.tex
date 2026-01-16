@@ -104,7 +104,44 @@ Probability P maps the events from a sample space to real numbers such that
     \item For a countable collections of mutually exclusive sets $A_1, A_2, A_3, ... A_n \in S$, $P(A_1 \cup A_2 \cup \dots \cup A_n) = P(A_1) + P(A_2) + \dots + P(A_n)$
 
 \end{enumerate}
+\subsection{Theorems}
+\textbf{Theorem 1.4} \newline
+$P(A^c) = 1 - P(A)$. 
 
+For any two sets $A$ and $B$ not necessarily mutually exclusive:
+\[
+P(A \cup B) = P(A) + B(B) - P(A \cap B)
+\]
+Visual Explaination:
+
+\begin{venndiagram2sets}
+\fillA
+\end{venndiagram2sets}
+
+\begin{venndiagram2sets}
+\fillB
+\end{venndiagram2sets}
+
+
+Here we see the intersection of $A$ and $B$ could be counted twice if we add $P(A)$ and $P(B)$ so we have to subtract the intersection so it is only counted once. \newline \newline
+\textbf{Theorem 1.5} \newline
+The probability of event $B =  \{s_1, s_2, \dots s_m\}$ is the sum of probabilities contained in the event:
+\[
+    P(B) = \sum_{i=1}^{m} P(\{s_i\})
+\]
+Follows from axiom 3 as each $s_i$ is mutually exclusive.  \newline \newline
+\textbf{Theorem 1.6} \newline
+For an experiment with sample space $S = \{s_1, \dots, s_n \}$ in which each outcome $s_i$ is equally likely, 
+\[
+    P(s_i) = 1/n \hspace{5mm} 1 \leq i \leq n
+\]
+Where $n$ is the number of outcomes in the sample space (same as n is equal to the cardinality of $S$)  \newline
+\newline
+\textbf{Theorem 1.7} \newline
+If outcomes in an experiment are equally likely, then probability of event A is given by:
+\[
+P(A) = \frac{|A|}{|S|}
+\]
+Where $||$ denotes the cardinality of the set.
 \subsection{Conditional Probability}
-
 \end{document}

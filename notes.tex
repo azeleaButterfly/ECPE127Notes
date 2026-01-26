@@ -128,35 +128,121 @@ Visual Explaination:
 \end{venndiagram2sets}
 
 
-Here we see the intersection of $A$ and $B$ could be counted twice if we add $P(A)$ and $P(B)$ so we have to subtract the intersection so it is only counted once. \newline \newline
-\textbf{Theorem 1.5} \newline
+Here we see the intersection of $A$ and $B$ could be counted twice if we add $P(A)$ and $P(B)$ so we have to subtract the intersection so it is only counted once. \newline
+\subsubsection{Theorem 1.5}
 The probability of event $B =  \{s_1, s_2, \dots s_m\}$ is the sum of probabilities contained in the event:
 \[
     P(B) = \sum_{i=1}^{m} P(\{s_i\})
 \]
-Follows from axiom 3 as each $s_i$ is mutually exclusive.  \newline \newline
-\textbf{Theorem 1.6} \newline
+Follows from axiom 3 as each $s_i$ is mutually exclusive. 
+\subsubsection{Theorem 1.6}
 For an experiment with sample space $S = \{s_1, \dots, s_n \}$ in which each outcome $s_i$ is equally likely, 
 \[
     P(s_i) = 1/n \hspace{5mm} 1 \leq i \leq n
 \]
-Where $n$ is the number of outcomes in the sample space (same as n is equal to the cardinality of $S$)  \newline
-\newline
-\textbf{Theorem 1.7} \newline
+Where $n$ is the number of outcomes in the sample space (same as n is equal to the cardinality of $S$)  
+\subsubsection{Theorem 1.7}
 If outcomes in an experiment are equally likely, then probability of event A is given by:
 \[
 P(A) = \frac{|A|}{|S|}
 \]
-Where $||$ denotes the cardinality of the set.
+Where $||$ denotes the cardinality (number of elements) of the set.
 \subsection{Conditional Probability}
 The \textbf{conditional probability} of the event $A$ given the occurance occurance of the event $B$ is 
 \[
 P(A | B) = \frac{P(A \cap B)}{B}
 \]
 \subsection{Law of Total Probability}
-\textbf{Theorem 1.10: } For an event space $\{B_1, B_2, \dots, B_m\}$ with $P(B_i) > 0$ for all $i$
+You use the law of total probability when your desired outcome may come from muliple sources with certain probability and the sources themselves have probability of being chosen.
+\subsubsection{Theorem 1.10: }
+For an event space $\{B_1, B_2, \dots, B_m\}$ with $P(B_i) > 0$ for all $i$
 \[
 P(A) = \sum_{i=1}^{m} P(A | B_i)P(B_i)
+\]
+This can be shown using the conditional probability formula as 
+\[
+P(A) = \sum_{i=1}^{m} P(A | B_i)P(B_i) = \sum_{i=1}^{m} \frac{A\cap B_i}{B_i}P(B_i) = \sum_{i=1}^{m} P(A \cap B_i)
+\]
+\subsubsection{Example: Problem 2.2} 
+\textbf{Problem:} A company has three machines $B_1, B_2, B_3$ making 1k resistors. It is observed that $80\%$ of the resitors by $B_1$, $90\%$ of resistors by $B_2$ and $60\%$ of resistors are acceptable. Each hour $B_1$ produces 3000 resistors, $B_2$ produces 4000 resistors, and $B_3$ produces 3000 resistors. What is the probability that the company ships an acceptable resistor. \newline
+\textbf{Solution:} Let $P(B_i)$ be the probability of a resistor coming from a specific machine, and let $P(A_i)$ be the probability that machine produced an acceptable resistor. Then from the problem statement we get that $10000 = 3000 + 4000 + 3000$ resistors are produced every hour, which gives us our $P(B_i)$'s as
+\[
+P(B_1) = \frac{3000}{10000} = 0.3 \hspace{5mm} P(B_2) = \frac{4000}{10000} = 0.4 \hspace{5mm} P(B_3) = \frac{3000}{10000} = 0.3 
+\]
+Then also from the problem statement we get our $A_i$'s to be that 
+\[
+P(A_1) = 0.9 \hspace{5mm} P(A_2) = 0.8 \hspace{5mm} P(A_3) = 0.6
+\]
+From this we can compute our probability of an acceptable resistor $P(R)$ as 
+\[
+P(R) = P(B_1)P(A_1) + P(B_2)P(A_2) + P(B_3)P(A_3) = (0.3)(0.9) + (0.4)(0.8) + (0.3)(0.6) = 0.27 + 0.32 + 0.18 = 0.77 
+\]
+\subsection{Bayes' theorem}
+\subsubsection{Theorem 1.11}
+Bayes's theorem is that the probability of an event $B$ given event $A$ occured can be given by
+\[
+P(B | A) = \frac{P(A|B)P(B)}{P(A)}
+\]
+Which we can easily confirm as $P(A|B)P(B) = P(A \cap B) = P(B \cap A)$ and $P(B|A) = \frac{P(B \cap A)}{P(A)}$ by defintion. 
+\subsubsection{Example: Problem 2.3} 
+\textbf{Problem:} In the previous problem (2.2) what is the probability that the acceptable resistor came from $B_3$. \newline
+\textbf{Solution:} From Problem 2.2 as $P(R | P(B_3)) = 0.60$ as 0.60 of the resistors produced by $B_3$ are acceeptable. From this we can apply bayes' theorem to get
+\[
+P(B_3 | R) = \frac{P(R|B_3)(P(B_3))}{P(R)} = \frac{0.18}{0.77} \approx 0.234
+\]
+\subsection{Independence}
+\textbf{Definition:} Two events are independent if and only if 
+\[
+P(A \cap B) = P(A)P(B)
+\]
+\textbf{Defintion:} Three events $A_1, A_2$ and $A_3$ are independent if and only if 
+\begin{enumerate}
+    \item $A_1$ and $A_2$ are independent
+    \item $A_2$ and $A_3$ are independent
+    \item $A_1$ and $A_3$ are independent
+    \item $P(A_1 \cap A_2 \cap A_3) = P(A_1)P(A_2)P(A_3)$
+\end{enumerate}
+\textbf{Definition:} Multiple events $A_1, A_2, \dots, A_n$ are independent if and only if both 
+\[
+P(A_i \cap P_j) = P(A_i)P(A_j) \text{ and } P(\bigcap_{i = 1}^{n} A_i) = \prod_{i=1}^{n}P(A_i)
+\]
+For all pairs $i,j$ $1 \leq i \leq n$, $1 \leq j \leq n$ where $i \neq j$.
+\subsection{Independent Trials}
+\textbf{Properties:}
+\begin{enumerate}
+    \item They are identical subexperiments in a sequential experiment
+    \item The probability models of all subexperiments are identical and independent of the outcomes in other subexperiments (iid)
+\end{enumerate}
+If you have an event that is $S = \{0,1\}$ and you want to find the outcome of $k$ sucesses in $n$ trials with $P(1) = p$ in a specific ordering
+\[
+P(n_1 = k) = p^k(1-p)^{n-k}  
+\]
+If you don't care about the order of the successes you will add a binomial term, as you will be choosing $k$ successes out of $n$ trials  
+\[
+P(n_1 = k) = \binom{n}{k} p^k(1-p)^{n-k}
+\]
+The probability of at least $k$ successes in $n$ trials with each event having probability of sucesses $p$ is
+\[
+P(n_1 \geq k) = \sum_{i = 0}^{n-k} \binom{n}{k + i} (p)^{k+i}(1-p)^{n-k-i}
+\]
+Extending this to the multinomial case we get that if a sub experiment has sample spaces $S = \{s_0, \dots s_{m-1}\}$, the probability of $s_0$ appearing $n_0$ times, $s_1$ appearing $n_1$ times and $s_m$ appearing $n_m$ times is:
+\[
+P(E_{n_0,n_1,\dots,n_m}) = \binom{n}{n_0,n_1,\dots,n_m} P(s_0)^{n_0}P(s_1)^{n_1} \dots P(s_m)^{n_m}
+\]
+Where $n = \sum_{i = 0 }^{m} n_i$.
+\subsection{Problem 3.1}
+To communicate one bit information reliably, cellular phones trasmit the same binary symbol 5 times. The reciever detects the correct information if three or more binary symols are received correctly. What is the information error probability $P(E)$ if the binary symbol error is probability $q = 0.1$
+\[
+P(E) = 1 - \binom{5}{3}(0.9)^3(0.1)^2 + \binom{5}{4}(0.9)^4(0.1) + (0.9)^5 = \binom{5}{1}(0.9)(0.1)^4 + \binom{5}{2} (0.9)^2(0.1)^3
+\]
+\subsection{Problem 3.2}
+There are 8 VMs in a lab. Each computer can be in idle (I) with probability $0.2$, suspended (S) with probability $0.2$ and probability of active (A) with probability $0.6$
+What is the probability there are an equal number of idle and suspended VMs and at least 4 active VMs?
+\[
+P(I=S \land A \geq 4) = P(I=2, S=2, A=4) + P(I=1,S=1,A=6) + P(I=0, S=0, A = 8)
+\]
+\[
+= \binom{8}{2,2,4} (0.2)^2(0.2)^2(0.6)^4 + \binom{8}{1,1,6}(0.2)(0.2)(0.6)^6 + \binom{8}{0,0,8} (0.6)^8
 \]
 \newpage
 \section{Week 2}
@@ -216,8 +302,10 @@ P(n,k) = \Myperm[n]{k} = \frac{n!}{(n-k)!}
 \subsubsection{Counting Principle 3}
 When you pick $k$ objects from $n$ objections, each way contains $k$ objects that can be permuted $k!$ ways. The number of ways to \textbf{choose} $k$ objects out of $n$ distinguishable objects is:
 \[
-\binom{n}{k} = \frac{n!}{(n-k)!k!}
+\binom{n}{k} = \frac{n!}{(n-k)!k!}  
 \]
+
+
 \subsection{Problem 2.7}
 In a game of yummy you are dealt a seven card hand.
 \subsubsection{Part A}
@@ -225,5 +313,49 @@ In a game of yummy you are dealt a seven card hand.
 \[
 P(R_7) = \frac{\binom{26}{7}}{\binom{52}{7}} = \frac{26!}{(26 - 7)!7!} \cdot \frac{(52-7)!7!}{52!} = \frac{26!45!}{19!52!} = 0.00492
 \]
-\end{document}!
+\subsubsection{Part B}
+\textbf{Q:} What is the probability $P(F)$ that your hand has only face cards
+\[
+P(F) = \frac{\binom{12}{7}}{\binom{52}{7}} = 5.91 \times 10^{-6} 
+\]
+\subsection{Problem 2.8}
+\subsubsection{Part A}
+\textbf{Q:} In a game of poker you are dealt a five of card hand. What is the probability of a full house: "Three of a kind and two of a kind"
+\[
+P(FH) = \frac{13\binom{4}{3} \cdot 12 \binom{4}{2}}{\binom{52}{5}} = 0.00144 = 0.14\%
+\]
+This comes from there being 13 suites and you pick one of them, then choose 3 from the 4 cards in that suite, then for the pair you have a different suite and you pick 2 from the 4 in that new suite. Note $\binom{n}{1} = n$. 
+\subsubsection{Part B}
+\textbf{Q:} In a game of poker you are dealt a five of card hand. What is the probability of a 4 of a kind 
+\[
+P(4oK) =  \frac{13 * 48}{\frac{52}{5}} = 0.000240 = 0.02\%
+\]
+This comes from there being 13 ways to make a 4 of a kind, and then 48 different cards remaining in your deck of 52
+\subsection{Counting Principle Number 4}
+The number of observation sequences for $n$ subexperiments with sample space $S=\{0,1\}$ with $0$ appearing $n_0$ times and $1$ appearing $n_1 = n - n_0$ times is 
+\[
+\binom{n}{n_1}
+\]
+\subsubsection{Example Problem:}
+Consider a 32 digit binary value, and you test each bit. How many binary codes with exactly 8 1s exist. 
+\[
+P(n_1 = 8) = \binom{32}{8}
+\]
+We get this as $n =32$ from the fact its a 32 bit value and each bit is a $0$ or $1$ value. 
+\subsection{Counting Principle 5 (Multinomial)}
+For $n$ repeating subexperiments with Sample Space $S - \{s_0, \dots, s_{m-1}\}$ the number of length $n=n_0 + n_1 + \dots + n_{m-1}$ obersvation sequences with $s_i$ appearing $s_i$ times is 
+\[
+\binom{n}{n_0, n_1, \dots, n_{m-1}} = \frac{n!}{n_0!n_1!\dots n_{m-1}!}
+\]
+\subsection{Problem 2.10}
+\textbf{Q:} Consider testing each of the 16 elements where each element can be in high voltage state (H), low holtage state (L) and high impedance state (Z). In how many ways can you observe $6H$, $8L$ and $2Z$ elements?
+\[
+P(6H,8L,2Z) = \binom{16}{6,8,2} = \frac{16!}{6!8!2!}
+\]
+\newpage
 
+\section{Week 3}
+\subsection{Discrete Random Variables}
+
+
+\end{document}
